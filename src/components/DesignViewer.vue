@@ -4,8 +4,7 @@
 
   <div class="right">
   <div class="top-spacer"></div>
-  <h2 class='invisible'>spacer</h2>
-  <hr class='invisible'>
+  <!-- <h2 class='invisible'>spacer</h2> -->
     <div v-for="image in images" :key="image">
       <img :src="'/images/' + image" alt="">
     </div>

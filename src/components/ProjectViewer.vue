@@ -18,13 +18,13 @@
       <div class='v-flex' v-if="if_previous_project">
         <p class='no-padding sans'>newer projects</p>
         <div class="break"></div>
-        <h6 class='no-padding'><a :href="'/projects/' + previous_project.name"><- {{ remove_underscores(previous_project.name) }}</a></h6>
+        <h6 class='no-padding'><router-link :to="'/projects/' + previous_project.name"><- {{ remove_underscores(previous_project.name) }}</router-link></h6>
       </div><div v-else></div>
 
       <div class='v-flex' style='justify-content:right;' v-if="if_next_project">
         <p class='no-padding sans'>older projects</p>
         <div class="break"></div>
-        <h6 class='no-padding'><a :href="'/projects/' + next_project.name">{{ remove_underscores(next_project.name) }} -></a></h6>
+        <h6 class='no-padding'><router-link :to="'/projects/' + next_project.name">{{ remove_underscores(next_project.name) }} -></router-link></h6>
       </div>
 
     </div>

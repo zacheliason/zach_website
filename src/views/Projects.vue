@@ -6,8 +6,7 @@
     <div class="left">
       <div v-for="project in projects" :key="project.id">
         <li>
-          <a class='project' :href="'/projects/' + project.name">{{project.name.replaceAll("_", " ").replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}}<span class='date'> {{ format_date(project.date) }}</span></a>
-
+          <router-link :to="'/projects/' + project.name">{{project.name.replaceAll("_", " ").replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}}<span class='date'> {{ format_date(project.date) }}</span></router-link>
         </li>
       </div>
     </div>

@@ -20,7 +20,7 @@
         <div class="items">
           <div v-if="show_items" class='items'>
             <div v-for="item in items" :key="item.id">
-              <a :href="'/design/' + item.name"><div class="item" v-bind:style="'background: url(/images/' + item.image[0] + ') no-repeat center top;'"></div></a>
+              <router-link :to="'/design/' + item.name"><div class="item" v-bind:style="'background: url(/images/' + item.image[0] + ') no-repeat center top;'"></div></router-link>
             </div>
           </div>
           <div v-else style="width:100%">

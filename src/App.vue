@@ -3,19 +3,19 @@
     <div id="bar">
       <div id="bar-container">
         <div >
-            <a href="/"><h3>zacheliason{{pathname}}</h3></a>
+            <router-link to="/"><h3>zacheliason{{pathname}}</h3></router-link>
         </div>
         <div id="right-box">
             <div class="">
-              <a href="/projects">🤖 projects</a>
+              <router-link to="/projects">🤖 projects</router-link>
             </div>
 
             <div class="">
-              <a href="/design">💿 design</a>
+              <router-link to="/design">💿 design</router-link>
             </div>
 
             <div class="">
-              <a href="/about">🙇‍♂️ about</a>
+              <router-link to="/about">🙇‍♂️ about</router-link>
             </div>
 
         </div>
