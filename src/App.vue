@@ -50,7 +50,8 @@ export default {
   name: "App",
   computed: {
     pathname() {
-      let path = window.location.pathname;
+      let path = this.$route.path;
+      console.log(path);
       path = path.replace('projects', '🤖')
       path = path.replace('design', '💿')
       path = path.replace('about', '🙇‍♂️')
