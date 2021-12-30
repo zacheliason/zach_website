@@ -380,7 +380,6 @@ export default {
           .style("fill", "white")
           .style("font-family", "space mono"));
 
-      //console.log(xAxis);
       svg.append("text")
         .attr("text-anchor", "end")
         .attr("x", width)

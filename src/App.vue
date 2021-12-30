@@ -51,7 +51,6 @@ export default {
   computed: {
     pathname() {
       let path = this.$route.path;
-      console.log(path);
       path = path.replace('projects', '🤖')
       path = path.replace('design', '💿')
       path = path.replace('about', '🙇‍♂️')

@@ -39,6 +39,10 @@ span:hover{
   color: #f74825;
 }
 
+body {
+  background-color: white;
+}
+
 
 @media screen and (max-width: 820px) {
 

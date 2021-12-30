@@ -7,6 +7,7 @@ import Design from '../views/Design.vue';
 import DesignViewer from '../components/DesignViewer.vue';
 import About from '../views/About.vue';
 import SpotifyStreamgraph from '../views/SpotifyStreamgraph.vue';
+import Cv from '../views/CV.vue'
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [{
     path: "/about",
     name: "About",
     component: About
+  },
+  {
+    path: "/about/cv",
+    name: "CV",
+    component: Cv
   },
   {
     path: "/design",

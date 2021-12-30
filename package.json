@@ -19,6 +19,8 @@
     "prismjs-darcula-theme": "^1.0.2",
     "vue": "^2.6.11",
     "vue-markdown": "^2.2.4",
+    "vue-pdf": "^4.3.0",
+    "vue-pdf-embed": "^1.0.5",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {

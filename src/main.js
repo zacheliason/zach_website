@@ -5,7 +5,6 @@ import dataset from './dataset.json'
 import items from './items.json'
 import VueMarkdown from 'vue-markdown'
 
-
 Vue.config.productionTip = false;
 let data = {
   projects: dataset.sort(function(a, b) {
@@ -15,7 +14,6 @@ let data = {
   show_photos: false,
   show_design: false,
   items: items,
-
 }
 
 // Globally register your component
@@ -25,7 +23,7 @@ new Vue({
   router,
   data,
   components: {
-    VueMarkdown
+    VueMarkdown,
   },
   render: h => h(App)
 }).$mount("#app");
