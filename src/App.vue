@@ -39,7 +39,7 @@
         <a target='_blank' href="https://github.com/zacheliason/">github</a>
       </div>
       <div id='sitecode'>
-        <a target='_blank' href="https://github.com/zacheliason/z_portfolio">[site code]</a>
+        <a target='_blank' href="https://github.com/zacheliason/zach_website">[site code]</a>
       </div>
     </footer>
 

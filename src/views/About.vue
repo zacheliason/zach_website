@@ -9,7 +9,6 @@
           <p>I'm proficient in <span class='data'> Python, R, Bash, C++, SQL, MongoDB/NoSQL, Git version control, Javascript, Vue.js, Node.js, HTML/CSS, data visualization, </span><span class='design'> Adobe Illustrator, InDesign, Photoshop, Aftereffects, </span> &#38;<span class='misc'> Russian.</span></p>
           <p>I enjoy hiking, art, music, photography, climbing, gardening, reading, ice skating, book-binding, &#38; cooking.</span></p>
           <p>View my full resume <router-link to="/about/cv">here</router-link>
-here.</a>
           </p>
         </div>
       </div>
