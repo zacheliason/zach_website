@@ -36,7 +36,7 @@
 <script>
 import Prism from 'prismjs'
 // import 'prismjs-darcula-theme/darcula.css';
-import '../styles/darcula.css'
+import '../assets/darcula.css'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-python'
