@@ -1,5 +1,8 @@
 <template>
   <div class="spotify">
+    <div class="top-spacer">
+
+    </div>
     <FileImport />
   </div>
 </template>
@@ -15,10 +18,3 @@ export default {
   }
 };
 </script>
-
-<style media="screen">
-  .spotify {
-    z-index: 9999999999999999 !important;
-    position: absolute;
-  }
-</style>

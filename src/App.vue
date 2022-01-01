@@ -187,6 +187,10 @@ a {
   display: none;
 }
 
+.mono {
+  font-family: 'ibm-plex-mono'; 
+}
+
 @media screen and (max-width: 820px) {
 }
 

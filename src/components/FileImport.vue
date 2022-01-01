@@ -1,43 +1,68 @@
 <template lang="html">
-  <div id="all">
-    <router-link @click="revert" id="exit" to="/coding"> &#x2715;</router-link>
+  <div>
     <div class="mobile">
-      <p>This app does not work on mobile. Please try a computer!</p>
-    </div>
-    <div class="frontpage" v-if="frontPage">
-      <p>First, request your data from Spotify at the bottom of your account's <a target="_blank" href="https://www.spotify.com/us/account/privacy/">Privacy Settings</a> page.
-         (it may take up to 30 days to gather your streaming history) You will receive an email once it is ready to download. Then, <span class="bold" v-on:click="changePage">click here.</span> </p>
-    </div>
-    <div class="backpage" v-if="!frontPage">
+      <div class="">
+        <p>This app does not work on mobile. Please try a computer.</p>
+        <router-link to="/">[home]</router-link>
 
-      <div class="importStuff" v-if="importPending">
+      </div>
+    </div>
+
+    <div class="frontpage" v-if="front_page">
+      <h2>request spotify data</h2>
+      <p>First, request your data from Spotify at the bottom of your account's <a target="_blank" href="https://www.spotify.com/us/account/privacy/">Privacy Settings</a> page.
+         (it may take up to 30 days to gather your streaming history) You will receive an email once it is ready to download. Then, click <a class="bold" v-on:click="change_page">here.</a> </p>
+       <p>For an explanation of this project and its process, click <router-link to="/projects/spotify_streamgraph_explanation">here.</router-link>
+ </p>
+    </div>
+    <div class="backpage" v-if="!front_page">
+
+      <div class="import_data" v-if="import_pending">
+          <h2>import spotify data</h2>
+          <p>Your zipped data file will include a number of <span class='mono'>StreamingHistoryJSON</span> files starting from <span class='mono'>0</span> and counting up. Add each of these files sequentially, then press create to view your streamgraph.<br></p>
+          <p><a class="bold" @click="change_page">[how to download spotify data]</a></p>
+          <hr>
         <div class="left">
           <div class="box">
-            <input @change="changeFile" type="file" id="selectFiles" value="Import"><br>
-            <label for="selectFiles" @change="changeFile">Select File</label>
-            <button disabled :style="hoverStyle(fileSelected)" id="import" @click="importFile();changeFile();changeFileAdded();">{{importText}}</button>
-            <button id="gogogo" :style="hoverStyle(fileAdded)" @click="groupByArtist">Create</button>
-            <h1>Files added: {{fileNum}}</h1>
-            <div class="dot-windmill"></div>
-          </div>
-        </div>
-        <div class="right">
-          <div class="box">
-            <p>After you've unzipped your data file, you should see a number of <b> StreamingHistory </b> JSONs starting from 0 and counting up, depending on how much music you listened to. Add each of these files in order, then create your streamgraph.<br><br> <span class="bold" @click="changePage">Forgot how to get your Spotify data?</span> </p>
+            <input @change="change_file" type="file" id="selectFiles" value="Import"><br>
+            <label for="selectFiles" @change="change_file">select file</label>
+            <button disabled :style="hover_style(file_selected)" id="import" @click="import_file();change_file();change_file_added();">{{import_text}}</button>
+            <button id="gogogo" :style="hover_style(file_added)" @click="group_by_artist">create</button>
+            <h2>files imported:</h2>
+            <div v-for="file in files">
+              <p class='mono'>{{file}}</p>
+            </div>
+
           </div>
         </div>
       </div>
-      <div class="vizpage" id="vizpage" v-bind:style=" importPending ? 'display: none;' : 'display: unset;' ">
-        <button type="button" name="button" class="revertButton" @click="revert">Reset</button>
-        <!--<div class="button1" v-on:click="changeCardinal">Cardinal</div>
+
+      <div class="vizpage" id="vizpage" v-bind:style=" import_pending ? 'display: none;' : 'display: unset;' ">
+
+        <h2>top artists</h2>
+        <div class="top-artists">
+          <div class='top-artist' v-for="i in 20">
+            {{i}}. <span class='bold mono'>{{top_artists[i - 1]}}:</span>
+            {{minutes_to_hours(top_artists[i - 1])}}
+          </div>
+        </div>
+
+        <div class="top-spacer"></div>
+
+        <h2>streamgraph</h2>
+        <!-- <div class="button1" v-on:click="changeCardinal">Cardinal</div>
         <div class="button1" v-on:click="changeStep">Step</div>
-        <div class="button1" v-on:click="changePoint">Point</div>
-        <button type="button" id="buttonXlim" >UP</button>
-        <button class="downloadButton" @click="downloadWithCSS">Download PDF</button>-->
-        <div v-bind:style=" cardinalSwitch1 ? 'display: unset;' : 'display: none;' " id="my_dataviz"></div>
-        <!--<div v-bind:style=" stepSwitch1 ? 'display: unset;' : 'display: none;' " id="my_dataviz2"></div>
-        <div v-bind:style=" pointSwitch1 ? 'display: unset;' : 'display: none;' " id="my_dataviz3"></div>-->
+        <div class="button1" v-on:click="changePoint">Point</div> -->
+        <!-- <button type="button" id="buttonXlim" >UP</button>
+        <button class="downloadButton" @click="downloadWithCSS">Download PDF</button> -->
+        <div v-bind:style=" cardinal_switch1 ? 'display: unset;' : 'display: none;' " id="streamgraph"></div>
+        <div v-bind:style=" step_switch1 ? 'display: unset;' : 'display: none;' " id="streamgraph2"></div>
+        <div v-bind:style=" point_switch1 ? 'display: unset;' : 'display: none;' " id="streamgraph3"></div>
+        <button type="button" name="button" class="revert_button" @click="revert">reset</button>
       </div>
+    </div>
+    <div class="top-spacer">
+
     </div>
 
 
@@ -59,49 +84,59 @@ export default {
   },
   data() {
     return {
-      demoPage: true,
-      fileSelected: false,
-      frontPage: true,
-      cardinalSwitch: true,
-      stepSwitch: false,
-      pointSwitch: false,
-      importText: "Add File",
-      fileAdded: false,
+      import_pending: true,
+      demo_page: true,
+      file_selected: false,
+      front_page: true,
+      cardinal_switch: true,
+      step_switch: false,
+      point_switch: false,
+      import_text: "add file",
+      file_added: false,
       fileNum: 0,
-      tempArray: [],
+      temp_array: [],
       buttonHov: {
-        backgroundcolor: 'white',
-        color: 'black',
-        transition: '.3s',
+        color: 'white',
+        backgroundcolor: '#f74825',
       },
     }
   },
   methods: {
+    minutes_to_hours(artist) {
+      let min = this.$root.$data.top_artists_keys[artist]
+
+      var hours = Math.floor(parseInt(min) / 60);
+      var minutes = parseInt(min) % 60;
+
+     return hours + " hrs, " + minutes + " min"
+    },
     revert() {
-      this.fileAdded = false;
-      this.demoPage = false;
-      this.frontPage = false;
+      this.file_added = false;
+      this.demo_page = false;
+      this.front_page = false;
       this.fileNum = 0;
-      this.importText = "Add File";
-      this.$root.$data.importPending = true;
+      this.import_text = "add file";
+      this.import_pending = true;
       this.$root.$data.importedJSON = [];
-      this.$root.$data.artistList = [];
+      this.$root.$data.artist_list = [];
       this.$root.$data.csv = '';
-      this.$root.$data.topArtists = [];
-      this.$root.$data.topArtistsKeys = {};
-      this.$root.$data.weekMax = 0;
-      this.$root.$data.newWidth = 0;
-      let oldEl = document.getElementById('my_dataviz');
+      this.$root.$data.top_artists = [];
+      this.$root.$data.top_artists_keys = {};
+      this.$root.$data.week_max = 0;
+      this.$root.$data.new_width = 0;
+      this.$root.$data.files_imported = [];
+
+      let oldEl = document.getElementById('streamgraph');
       oldEl.remove();
       let newEl = document.createElement("div");
-      newEl.id = "my_dataviz";
+      newEl.id = "streamgraph";
       newEl.style.marginTop = "100px";
       document.getElementById("vizpage").appendChild(newEl);
 
     },
     changeDemo() {
-      this.demoPage = !this.demoPage;
-      this.frontPage = !this.frontPage;
+      this.demo_page = !this.demo_page;
+      this.front_page = !this.front_page;
     },
     downloadWithCSS() {
       let page = document.getElementById('all');
@@ -130,7 +165,7 @@ export default {
         doc.save('test.pdf');
       });*/
     },
-    hoverStyle(watchedVar) {
+    hover_style(watchedVar) {
       if (!watchedVar) {
         return {
           '--button-opacity': .3,
@@ -141,65 +176,68 @@ export default {
       }
       return {
         '--button-opacity': 1,
-        '--button-color--hover': this.buttonHov.color,
-        '--button-background-color--hover': this.buttonHov.backgroundcolor,
+        '--button-color--hover': this.buttonHov.backgroundcolor,
+        '--button-background-color--hover': this.buttonHov.color,
         '--button-transition--hover': this.buttonHov.transition
       };
     },
-    changeFile() {
-      this.fileSelected = !this.fileSelected;
+    change_file() {
+      this.file_selected = !this.file_selected;
       document.getElementById("import").disabled = !document.getElementById("import").disabled;
     },
-    changePage() {
-      this.frontPage = !this.frontPage;
+    change_page() {
+      this.front_page = !this.front_page;
     },
-    changeFileAdded() {
-      this.fileAdded = true;
+    change_file_added() {
+      this.file_added = true;
       this.fileNum += 1;
-      this.importText = this.fileAdded ? 'Add Another' : 'Add Another';
+      this.import_text = this.file_added ? 'add another' : 'add another';
     },
     changeCardinal() {
-      this.cardinalSwitch = true;
-      this.stepSwitch = false;
-      this.pointSwitch = false;
+      this.cardinal_switch = true;
+      this.step_switch = false;
+      this.point_switch = false;
     },
     changeStep() {
-      this.cardinalSwitch = false;
-      this.stepSwitch = true;
-      this.pointSwitch = false;
+      this.cardinal_switch = false;
+      this.step_switch = true;
+      this.point_switch = false;
     },
     changePoint() {
-      this.cardinalSwitch = false;
-      this.stepSwitch = false;
-      this.pointSwitch = true;
+      this.cardinal_switch = false;
+      this.step_switch = false;
+      this.point_switch = true;
     },
-    importFile() {
+    import_file() {
       var files = document.getElementById('selectFiles').files;
       if (files.length <= 0) {
         return false;
       }
 
       var fr = new FileReader();
+      fr.fileName = files[0].name // file came from a input file element. file = el.files[0];
+
       fr.onload = e => {
         var result = JSON.parse(e.target.result);
-        if (this.fileAdded == false) {
+        if (this.file_added == false) {
           this.$root.$data.importedJSON = result;
-        } else if (this.fileAdded) {
+        } else if (this.file_added) {
           this.$root.$data.importedJSON = this.$root.$data.importedJSON.concat(result);
-
         }
+
+        this.$root.$data.files_imported.push(e.target.fileName)
       }
       fr.readAsText(files.item(0))
     },
-    groupByArtist() {
+    group_by_artist() {
       this.$root.$data.jsonSuccess = true;
       let json = this.$root.$data.importedJSON;
-      this.$root.$data.artistList = _.mapValues(_.groupBy(json, "artistName"), x => x.map(y => _.omit(y, "artistName")));
+      this.$root.$data.artist_list = _.mapValues(_.groupBy(json, "artistName"), x => x.map(y => _.omit(y, "artistName")));
       this.sumPlayTime();
 
     },
     sumPlayTime() {
-      let artists = this.$root.$data.artistList;
+      let artists = this.$root.$data.artist_list;
       let newArray = [];
       for (var artist in artists) {
         var tempSum = 0;
@@ -216,25 +254,21 @@ export default {
       newArray.sort((a, b) => {
         return b.minutesListened - a.minutesListened;
       });
-      console.log("Top 50 Artists");
       let newNewArray = newArray.map(x => x.artistName + " " + x.minutesListened + " minutes listened")
-      for (let i = 1; i < 51; i++) {
-        //console.log("Number " + i + " " + newNewArray[i]);
-      }
       let coolobj = {}
       for (let i = 0; i < 20; i++) {
-        this.$root.$data.topArtists.push(newArray[i].artistName)
+        this.$root.$data.top_artists.push(newArray[i].artistName)
         coolobj[newArray[i].artistName] = newArray[i].minutesListened.toFixed(2)
-        this.$root.$data.topArtistsKeys = coolobj
+        this.$root.$data.top_artists_keys = coolobj
       }
 
-      //this.$root.$data.artistList
+      //this.$root.$data.artist_list
       this.jsonToCSV();
     },
     jsonToCSV() {
       let itemsList = this.$root.$data.importedJSON;
       let items = []
-      let topArtistList = this.$root.$data.topArtists;
+      let topArtistList = this.$root.$data.top_artists;
       for (let item in itemsList) {
         if (topArtistList.includes(itemsList[item].artistName)) {
           items.push(itemsList[item])
@@ -259,7 +293,7 @@ export default {
           maxListenTime = sumArray[num]
         }
       }
-      this.$root.$data.weekMax = maxListenTime;
+      this.$root.$data.week_max = maxListenTime;
       const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
       const header = Object.keys(newItems[0])
       const csv = [
@@ -296,15 +330,15 @@ export default {
       return fixedArray;
     },
     parseWeek(fooObj) {
-      let braveNewArray = []
-      let braveNewObj = []
-      let topArtists = this.$root.$data.topArtists;
+      let brand_new_Array = []
+      let brand_new_Obj = []
+      let top_artists = this.$root.$data.top_artists;
       let weekObj = fooObj;
       // adds missing artists
       for (let week in weekObj) {
         let results = weekObj[week];
-        for (let i in topArtists) {
-          let topArtist = topArtists[i];
+        for (let i in top_artists) {
+          let topArtist = top_artists[i];
           var checkForArtist = results.some(obj => topArtist in obj);
           if (checkForArtist) {
             continue
@@ -317,43 +351,40 @@ export default {
       }
       //consolidates weeks and artist play counts
       for (let week in weekObj) {
-        braveNewObj = {}
+        brand_new_Obj = {}
         let results = weekObj[week];
         for (let i in results) {
           let artistObj = results[i];
           let artist = Object.keys(artistObj)[0];
-          braveNewObj[artist] = artistObj[artist];
+          brand_new_Obj[artist] = artistObj[artist];
         }
-        braveNewObj["week"] = week;
-        braveNewArray.push(braveNewObj)
-        //braveNewObj
+        brand_new_Obj["week"] = week;
+        brand_new_Array.push(brand_new_Obj)
+        //brand_new_Obj
       }
 
-      return braveNewArray;
+      return brand_new_Array;
     },
     createStreamgraph() {
-      let weekMax = .7 * this.$root.$data.weekMax;
+      let week_max = .7 * this.$root.$data.week_max;
       let csvToUse = this.$root.$data.csv;
-      let topartistskeys = this.$root.$data.topArtistsKeys
-      // set the dimensions and margins of the graph
-      //if (window.innerWidth) console.log(window.innerWidth);
-      //else console.log(920);
+      let topartistskeys = this.$root.$data.top_artists_keys
       var margin = {
           top: 20,
-          right: 30,
+          right: 0,
           bottom: 30,
-          left: 30
+          left: 0,
         },
 
-        width = 920 - margin.left - margin.right,
+        width = 1220 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
-      this.$root.$data.newWidth = width;
+      this.$root.$data.new_width = width;
 
       // append the svg object to the body of the page
-      var svg = d3.select("#my_dataviz")
+      var svg = d3.select("#streamgraph")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("height", height + margin.top + margin.bottom + 100)
         .append("g")
         .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
@@ -373,12 +404,17 @@ export default {
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x).ticks(data.length - 1))
         .call(g => g.select(".domain")
-          .style("stroke", "white"))
+          .style("stroke", "black"))
         .call(g => g.selectAll(".tick line")
-          .style("stroke", "white"))
+          .style("stroke", "black"))
         .call(g => g.selectAll(".tick text")
-          .style("fill", "white")
-          .style("font-family", "space mono"));
+          .style("fill", "black")
+          .style("font-family", "ibm-plex-mono"))
+        .call(g => g.selectAll("text")
+          .attr("transform", function(d) {
+              return "rotate(45 -15 15)"
+          }));
+
 
       svg.append("text")
         .attr("text-anchor", "end")
@@ -388,7 +424,7 @@ export default {
 
       // Add Y axis
       var y = d3.scaleLinear()
-        .domain([-weekMax, weekMax])
+        .domain([-week_max, week_max])
         .range([height, 0]);
 
 
@@ -414,8 +450,8 @@ export default {
         .attr("y", 0)
         .style("opacity", 0)
         .style("font-size", 17)
-        .style("color", "#FFFFFF")
-        .style("fill", "#FFFFFF")
+        .style("color", "#000000")
+        .style("fill", "#000000")
         .style("font-weight", "bolder")
         .style("z-index", 10000)
         .style("mix-blend-mode", "difference")
@@ -427,8 +463,8 @@ export default {
         .attr("y", 20)
         .style("opacity", 0)
         .style("font-size", 17)
-        .style("color", "#FFFFFF")
-        .style("fill", "#FFFFFF")
+        .style("color", "#000000")
+        .style("fill", "#000000")
         .style("z-index", 10000)
 
       // Three function that change the tooltip when user hover / move / leave a cell
@@ -438,7 +474,6 @@ export default {
         d3.selectAll(".myArea").transition().duration(250).style("opacity", .2)
         d3.select(this)
           .transition().duration(151)
-          .style("stroke", "black")
           .style("opacity", 1)
       }
       var grp = ""
@@ -490,26 +525,7 @@ export default {
         .on("mouseover", mouseover)
         .on("mousemove", mousemove)
         .on("mouseleave", mouseleave)
-        console.log("SVG: ");
-        console.log(svg);
-        console.log("AREA:");
-        console.log(area);
-      /*
-        svg
-        .selectAll("myCircles")
-        .data(stackedData)
-        .enter()
-        .append("circle")
-        .attr("fill", "blue")
-        .attr("stroke", "none")
-        .attr("cx", function(d) {
-          return x(d.date)
-        })
-        .attr("cy", function(d) {
-          return y(d.value)
-        })
-        .attr("r", 3)
-      */
+
       function updatePlot() {
         /*
         x.domain([new Date(data[3].week), new Date(data[data.length - 3].week)]);
@@ -527,7 +543,7 @@ export default {
 
       d3.select("#buttonXlim").on("click", updatePlot);
 
-      this.$root.$data.importPending = false;
+      this.import_pending = false;
       //this.createStreamgraphBlock();
       //this.createStreamgraphSharp();
 
@@ -536,144 +552,83 @@ export default {
     },
   },
   computed: {
-    importPending() {
-      return this.$root.$data.importPending;
+    top_artists_keys() {
+      return this.$root.$data.top_artists_keys
     },
-    cardinalSwitch1() {
-      return this.cardinalSwitch;
+    top_artists() {
+      return this.$root.$data.top_artists
     },
-    stepSwitch1() {
-      return this.stepSwitch;
+    files() {
+      return this.$root.$data.files_imported;
     },
-    pointSwitch1() {
-      return this.pointSwitch;
+    cardinal_switch1() {
+      return this.cardinal_switch;
+    },
+    step_switch1() {
+      return this.step_switch;
+    },
+    point_switch1() {
+      return this.point_switch;
     }
   },
-  mounted: function() {
-    document.getElementById("all").classList.add('fade');
-  }
 };
 </script>
 
 
 <style lang="css" scoped>
-* {
-  font-family: 'Space Mono', monospace;
-}
-h2 {
-  font-weight: normal !important;
-}
-.spotify {
-}
-#all {
-    opacity: 1;
-    transition-duration: 0.7s;
-    transition-property: opacity;
-    overflow: scroll;
-  }
 
-#all .fade {
-  opacity: 0;
-}
 .left {
-  position: absolute;
-  left: 0;
-  width: 50vw;
   height: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center !important;
-  border-style: dotted;
-  border-color: white;
-  border-width: 0 3px 0 0;
+  justify-content: flex-start;
+
 }
 .right {
-  display: flex;
   height: 100%;
-  align-items: center;
-  justify-content: center;
   position: absolute;
   right: 0;
   width: 50vw;
-
 }
+
 .downloadButton {
   position: fixed;
   top: 30px;
   right: 30px;
 }
+
 button {
   flex: 100%;
   opacity: var(--button-opacity);
 }
+
 button:hover {
   color: var(--button-color--hover);
   background-color: var(--button-background-color--hover);
   border-transition: var(--button-transition--hover);
 }
 
-.frontpage {
-  height: 100vh;
-  width: 100vw;
-  background-color: black;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .backpage {
   flex-wrap: nowrap;
-  height: 100vh;
-  width: 100vw;
-  background-color: black !important;
   z-index: 999 !important;
-  position: absolute;
-  top: 0;
-  left: 0;
   display: flex;
-  justify-content: center;
-}
-.importStuff {
-  text-align: center;
 }
 h1 {
-  color: white;
   transition: .5s;
-  font-size: 2em;
 }
 p {
-  font-family: "Space Mono", monospace !important;
   mix-blend-mode: unset !important;
 }
-.backpage p {
-  text-align: center;
-  color: white;
-  font-size: 1.5em;
-  margin: 0 20%;
-}
-.frontpage p {
-  text-align: center;
-
-  color: white;
-  margin: 30px 10%;
-  font-size: 2.5em;
-}
 .bold {
-  font-weight: bolder;
-  cursor: pointer;
-  transition: .3s;
+  color:#f74825;
 }
 a {
   text-decoration: none;
-  color: inherit;
-  font-weight: bolder;
+  color:#f74825;
+  font-family: "ibm-plex-mono", mono;
   transition: .3s;
 }
 .tooltip text{
-  color: white !important;
+  color: black !important;
   fill: red;
 }
 #selectFiles {
@@ -685,31 +640,29 @@ a {
 	z-index: -1;
 }
 label,button {
+  font-family: 'ibm-plex-mono', mono;
   cursor: pointer;
   width: max-content;
-  margin: 15px auto;
+  margin: 1em 1em 1em 0;
   display: block;
   padding: .3em 1em;
   border-style: solid;
   border-width: 3px;
-  border-color: white;
+  border-color: black;
   border-radius: 1000px;
-  color: white;
-  transition: .5s;
-  font-size: 2em;
-  background-color: black;
-}
-label:hover{
-  background-color: white;
   color: black;
-  transition: .3s;
 }
-a:hover,.bold:hover {
-  transition: .3s;
-  color: #24CFFA /*teal*/;
+
+label:hover{
+  color:#f74825;
 }
+
+a:hover {
+  mix-blend-mode: difference;
+}
+
 text {
-  color: white;
+  color: black;
   background-color: purple;
 }
 #buttonXlim {
@@ -717,9 +670,8 @@ text {
   bottom: 30px;
   right: 30px;
 }
-.demoPage {
+.demo_page {
   background-color: black;
-  text-align: center;
   height: auto;
   width: 100vw;
   z-index: 100;
@@ -727,69 +679,17 @@ text {
   top: 0;
   left: 0;
 }
-.demoPage img {
-  width: 80%;
-}
-.demoPage button:hover, .revertButton:hover {
-  background-color: white;
-  color: black;
-  transition: .5s;
-}
-.demoPage button {
-  margin-bottom: 60px;
+
+.revert_button:hover {
+  color: #f74825;
 }
 
-.dot-windmill {
-  margin: 0 auto;
-  position: relative;
-  top: -10px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: yellow;
-  color: yellow;
-  transform-origin: 5px 15px;
-  animation: dotWindmill 4s infinite linear;
-  transform: scale(5);
-  transition: 2s;
-
-}
-
-.dot-windmill::before, .dot-windmill::after {
-  content: '';
-  display: inline-block;
-  position: absolute;
-}
-
-.dot-windmill::before {
-  left: -8.66px;
-  top: 15px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #5A00FF /*blue*/;
-  color: #5A00FF /*blue*/;
-}
-
-.dot-windmill::after {
-  left: 8.66px;
-  top: 15px;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #24CFFA /*teal*/;
-  color: #24CFFA /*teal*/;
-}
-#my_dataviz {
-  display: flex !important;
-  align-items: center;
+#streamgraph {
+  display: flex;
   justify-content: center;
   height: 100%;
-  position: absolute;
-  left: 100px;
-  right: 0;
-  top: 0;
 }
+
 @keyframes dotWindmill {
   0% {
     transform: rotateZ(0deg) translate3d(0, 0, 0);
@@ -798,52 +698,43 @@ text {
     transform: rotateZ(720deg) translate3d(0, 0, 0);
   }
 }
+
 .fixme {
   position: fixed;
   bottom: 50px;
   right: 50px;
-  color: white;
-  font-size: 1em;
-}
-.mobile {
-  display: none;
-  font-size: .5em;
-  padding: 30px;
-}
-.mobile p {
-  color: white;
+  color: black;
 }
 
-.revertButton {
-  position: fixed;
-  left: 50px;
-  bottom: 50px;
+.mobile {
+  display: none;
+}
+
+.revert_button {
   z-index: 9999999 !important;
-  font-size: 1.5em;
   width: auto;
 }
 
 img {
   border: 0 !important;
 }
-#exit:hover{
-  transform: scale(2);
-  transition: .4s;
+
+.import_data {
+  width: 100%;
 }
-#exit {
-  transform: rotate(0);
-  transition: .3s;
-  position: fixed;
-  top: 30px;
-  right: 50px;
-  color: white;
-  z-index: 99999999 !important;
-  font-size: 2em;
+
+.top-artists {
+max-height: 15em;  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
 }
-h2  {
-  padding: 0 20%;
-  color: white;
+
+.top-artist {
+  width: 45%;
 }
+
 @media screen and (max-width: 900px) {
   .frontpage,.backpage {
     height: 130vh;
@@ -854,12 +745,17 @@ h2  {
     z-index: 99999 !important;
     height: 100vh;
     width: 100vw;
-    background-color: black;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
+    top:0;
+    left:0;
     text-align: center;
+  }
+  .mobile p {
+    padding: 2em;
   }
 }
 
