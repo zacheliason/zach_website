@@ -236,6 +236,7 @@ export default {
       this.sumPlayTime();
 
     },
+
     sumPlayTime() {
       let artists = this.$root.$data.artist_list;
       let newArray = [];
@@ -254,7 +255,7 @@ export default {
       newArray.sort((a, b) => {
         return b.minutesListened - a.minutesListened;
       });
-      let newNewArray = newArray.map(x => x.artistName + " " + x.minutesListened + " minutes listened")
+
       let coolobj = {}
       for (let i = 0; i < 20; i++) {
         this.$root.$data.top_artists.push(newArray[i].artistName)
@@ -412,7 +413,7 @@ export default {
           .style("font-family", "ibm-plex-mono"))
         .call(g => g.selectAll("text")
           .attr("transform", function(d) {
-              return "rotate(45 -15 15)"
+              return "rotate(45 -15 14)"
           }));
 
 
@@ -622,6 +623,7 @@ p {
   color:#f74825;
 }
 a {
+  cursor: pointer;
   text-decoration: none;
   color:#f74825;
   font-family: "ibm-plex-mono", mono;
