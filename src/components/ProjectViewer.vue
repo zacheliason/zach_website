@@ -146,13 +146,13 @@ img {
 }
 
 a {
-  font-weight: bold;
-  color: #f74825;
+  font-weight: bold !important;
+  color: #f74825 !important;
 }
 
 a:hover {
   text-decoration: underline;
-  color: #08b7da;
+  color: #08b7da !important;
 }
 
 .flexbox {
