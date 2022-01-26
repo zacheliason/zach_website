@@ -123,6 +123,17 @@ export default {
 
 <style type="text/css" scoped>
 
+a {
+  font-weight: bold !important;
+  color: #f74825 !important;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #08b7da !important;
+}
+
+
 h3 {
   font-family: 'ibm-plex-mono', mono;
   font-size: 3em;
@@ -143,16 +154,6 @@ img {
 
 .inline {
   display: inline-block;
-}
-
-a {
-  font-weight: bold !important;
-  color: #f74825 !important;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: #08b7da !important;
 }
 
 .flexbox {
