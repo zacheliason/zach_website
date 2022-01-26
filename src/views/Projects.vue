@@ -4,12 +4,12 @@
 
     <h2>projects</h2>
     <div class="left">
-      <div v-for="project in projects" :key="project.id">
-        <li>
+	<ul>
+        <li v-for="project in projects" :key="project.id">
           <router-link :to="'/projects/' + project.name">{{project.name.replaceAll("_", " ").replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}}<span class='date'> {{ format_date(project.date) }}</span></router-link>
         </li>
-      </div>
-      <router-link to="/projects/spotify_streamgraph">Spotify Streamgraph Generator<span class='date'> 1/30/2021</span></router-link>
+      <li><router-link to="/projects/spotify_streamgraph">Spotify Streamgraph Generator<span class='date'> 1/30/2021</span></router-link></li>
+	</ul>
     </div>
     <div class="right">
 
