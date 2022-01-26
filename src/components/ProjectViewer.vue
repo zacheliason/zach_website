@@ -145,8 +145,14 @@ img {
   display: inline-block;
 }
 
+a {
+  font-weight: bold;
+  color: #f74825;
+}
+
 a:hover {
   text-decoration: underline;
+  color: #08b7da;
 }
 
 .flexbox {

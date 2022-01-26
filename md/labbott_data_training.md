@@ -1,5 +1,5 @@
 ## Getting Started with Data Tiger
-This is all kind of a pain to get set up but it's really nice once you have it up and running!
+This is all kind of a pain to get set up but it's really nice once you have it up and running.
 
 ### 1. Download [PyCharm](https://www.jetbrains.com/pycharm/download/)
 ![](/images/screenshots/Screen%20Shot%202022-01-26%20at%2011.40.03%20AM.png)
@@ -11,7 +11,7 @@ This is all kind of a pain to get set up but it's really nice once you have it u
 ```console
 git --version
  ```
-undefinedIf you don’t have it installed already, it will prompt you to install it
+- If you don’t have it installed already, it will prompt you to install it
 #### Windows
 1. Download GitBash (a command line application which allows you to run bash on Windows) from the link [here](https://git-scm.com/download/win)
 ![](/images/screenshots/Screen%20Shot%202022-01-26%20at%2011.40.43%20AM.png)
