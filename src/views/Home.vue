@@ -14,7 +14,7 @@
         <div>
             <h2>Hi, I'm Zach!</h2>
             <p>I'm an enthusiastic bioinformatics student studying at <span class='smallcaps'>BYU</span> (2023) with interests in genetics, epidemiology, and quantitative ecology.</p>
-            <h1>🌱 🏔 👨‍🔬 🤖 🦠 🧬 ‍❤️‍🔥</h1>
+            <!--<h1>🌱 🏔 👨‍🔬 🤖 🦠 🧬 ‍❤️‍🔥</h1>-->
             <!-- 🤠🤖💻🕴🐸🌍🪐🌝🎹🚲🌊🎞🦠🧬❤️‍🔥🇺🇦💽📀💾👨‍💻👾🌱✨ -->
         </div>
       </div>

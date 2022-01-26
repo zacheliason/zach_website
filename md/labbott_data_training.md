@@ -7,15 +7,19 @@ This is all kind of a pain to get set up but it's really nice once you have it u
 ### 2. Install Git (Skip to step 3 if you already have Git installed on your computer)
 #### Mac
 1) Open terminal
+
 2) Run the following code:
+
 ```console
 git --version
  ```
-undefinedIf you don’t have it installed already, it will prompt you to install it
+- If you don’t have it installed already, it will prompt you to install it
 #### Windows
 1) Download GitBash (a command line application which allows you to run bash on Windows) from the link [here](https://git-scm.com/download/win)
+
 ![](/images/screenshots/Screen%20Shot%202022-01-26%20at%2011.40.43%20AM.png)
 2) Click the `Click here to download` link to download the most recent version
+
 ### 3. Download Data Tiger source code from [Github](https://github.com/Populustremuloides/DataTiger2)
 1) Click the green `Code` button 
 

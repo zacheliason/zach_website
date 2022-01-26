@@ -112,7 +112,6 @@ body {
 
 a {
   text-decoration: none;
-  color:black;
 }
 
 #bar-container {
