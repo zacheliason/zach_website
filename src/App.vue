@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div style="height: calc(100vh - 3em);width:65%;margin: 0 auto;">
+    <div style="height: calc(100vh - 3em);width:85%;margin: 0 auto;">
       <!-- VIEW ROUTER -->
       <router-view />
     </div>

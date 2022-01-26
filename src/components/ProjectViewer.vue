@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="width:80%">
     <div class="top-spacer"></div>
 
     <h2 style='display:inline-block;margin-bottom: 0;padding-right: .3em;'>{{ remove_underscores($route.params.id) }}</h2>
