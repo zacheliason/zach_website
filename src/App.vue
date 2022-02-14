@@ -294,7 +294,7 @@ a {
 
 @media screen and (max-width: 1000px) {
   .large {
-    width: unset;
+    width: 100% !important;
     margin: unset;
     position: unset;
     left: unset;
