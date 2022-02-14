@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <div class="vizpage" id="vizpage" v-bind:style=" import_pending ? 'display: none;' : 'display: unset;' ">
+      <div class="vizpage" id="vizpage" v-bind:style=" import_pending ? 'display: none;' : 'display: unset;' " style="width:100%">
 
         <h2>top artists</h2>
         <div class="top-artists">
@@ -49,7 +49,10 @@
 
         <div class="top-spacer"></div>
 
-        <h2>streamgraph</h2>
+	<div style="display:flex;justify-content:space-between;width:100%">
+        <h2 >streamgraph</h2>
+        <h2 class="revert_button" @click="revert">reset</h2>
+	</div>
         <!-- <div class="button1" v-on:click="changeCardinal">Cardinal</div>
         <div class="button1" v-on:click="changeStep">Step</div>
         <div class="button1" v-on:click="changePoint">Point</div> -->
@@ -58,7 +61,7 @@
         <div v-bind:style=" cardinal_switch1 ? 'display: unset;' : 'display: none;' " id="streamgraph"></div>
         <div v-bind:style=" step_switch1 ? 'display: unset;' : 'display: none;' " id="streamgraph2"></div>
         <div v-bind:style=" point_switch1 ? 'display: unset;' : 'display: none;' " id="streamgraph3"></div>
-        <button type="button" name="button" class="revert_button" @click="revert">reset</button>
+
       </div>
     </div>
     <div class="top-spacer">
@@ -97,7 +100,7 @@ export default {
       temp_array: [],
       buttonHov: {
         color: 'white',
-        backgroundcolor: '#f74825',
+        backgroundcolor: 'var(--bright)',
       },
     }
   },
@@ -131,6 +134,8 @@ export default {
       let newEl = document.createElement("div");
       newEl.id = "streamgraph";
       newEl.style.marginTop = "100px";
+      newEl.style.position = "absolute";
+      newEl.style.left = "7.5%";
       document.getElementById("vizpage").appendChild(newEl);
 
     },
@@ -620,12 +625,12 @@ p {
   mix-blend-mode: unset !important;
 }
 .bold {
-  color:#f74825;
+  color:var(--bright);
 }
 a {
   cursor: pointer;
   text-decoration: none;
-  color:#f74825;
+  color:var(--bright);
   font-family: "ibm-plex-mono", mono;
   transition: .3s;
 }
@@ -656,7 +661,7 @@ label,button {
 }
 
 label:hover{
-  color:#f74825;
+  color:var(--bright);
 }
 
 a:hover {
@@ -683,13 +688,16 @@ text {
 }
 
 .revert_button:hover {
-  color: #f74825;
+  color: var(--bright);
+  border-bottom: var(--bright) 2px dotted;
 }
 
 #streamgraph {
   display: flex;
   justify-content: center;
   height: 100%;
+  position:absolute;
+  left:7.5%;
 }
 
 @keyframes dotWindmill {
@@ -715,6 +723,9 @@ text {
 .revert_button {
   z-index: 9999999 !important;
   width: auto;
+  cursor: pointer;
+  border-bottom: var(--dark) 2px dotted;
+  color: var(--dark);
 }
 
 img {
@@ -726,7 +737,8 @@ img {
 }
 
 .top-artists {
-max-height: 15em;  display: flex;
+  max-height: 15em;
+  display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
@@ -734,7 +746,7 @@ max-height: 15em;  display: flex;
 }
 
 .top-artist {
-  width: 45%;
+  width: calc(var(--site-width) / 2);
 }
 
 @media screen and (max-width: 900px) {

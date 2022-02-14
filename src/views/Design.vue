@@ -99,16 +99,17 @@ export default {
 <style lang="css" scoped>
 .toggle {
   cursor: pointer;
+  color:var(--dark);
 }
 
 .active {
-  color:#f74825;
+  color:var(--bright);
 }
 
 .item {
   display: inline-block;
   margin-top: 1.5em;
-  width: calc((85vw - 4em) / 3);
+  width: calc((var(--site-width) - 4em) / 3);
   padding-top: 95%;
   height: 0;
   background: url(/images/iceberg.jpg);
@@ -136,12 +137,12 @@ export default {
 .square_overlay {
   display: inline-block;
   margin-top: 1.5em;
-  width: calc((85vw - 4em) / 3);
+  width: calc((var(--site-width) - 4em) / 3);
   padding-top: 95%;
   height: 0;
   background-size: cover !important;
   cursor: pointer;
-  background:#f74825;
+  background:var(--bright);
   /* opacity:0; */
 }
 
@@ -165,11 +166,7 @@ export default {
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 820px) {
-
-}
-
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 1000px) {
   .h-flex {
     display: block;
   }
@@ -180,6 +177,10 @@ export default {
 
   .item {
     width: calc(85vw);
+  }
+  .content, .description {
+    width: 90%;
+    margin: 0 5%;
   }
 }
 

@@ -2,24 +2,19 @@
   <div style="height:100%;width:100%;">
 
     <div class="top-spacer"></div>
-
-    <div class="left">
+    <div class="box">
       <div class="left-box">
         <img src="/images/zach_homepage_2.png" alt="">
       </div>
-    </div>
-
-    <div class='right'>
       <div class="right-box">
-        <div>
-            <h2>Hi, I'm Zach!</h2>
-            <p>I'm an enthusiastic bioinformatics student studying at <span class='smallcaps'>BYU</span> (2023) with interests in genetics, epidemiology, and quantitative ecology.</p>
+        <div style="height:100%;">
+            <h2 style="margin-top:0;">Hi, I'm Zach!</h2>
+            <p>I'm an enthusiastic bioinformatics student studying at <span class='smallcaps'>BYU</span> (2023) with interests in genetics, epidemiology, and quantitative ecology.</p> 
             <!--<h1>🌱 🏔 👨‍🔬 🤖 🦠 🧬 ‍❤️‍🔥</h1>-->
             <!-- 🤠🤖💻🕴🐸🌍🪐🌝🎹🚲🌊🎞🦠🧬❤️‍🔥🇺🇦💽📀💾👨‍💻👾🌱✨ -->
         </div>
       </div>
     </div>
-
     <div class="bottom-spacer"></div>
 
   </div>
@@ -33,38 +28,47 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.top-spacer {
+  height: 30%;
+}
+
 img {
   width: 100%;
+  padding:0;
 }
 
 .left-box {
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex:1;
+  margin-right:1em;
 }
 
 .right-box {
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex:1;
+  margin-left:1em;
 }
 
 p {
   font-family: 'ibm-plex-sans', sans-sans-serif;
 }
 
-.top-spacer {
-  height: 0;
+.box {
+  display:flex;
+  justify-content: space-between;
 }
+
 @media screen and (max-width: 820px) {
 
 }
 
 @media screen and (max-width: 620px) {
-  .left-box {
-    height: unset;
+  .box {
+    flex-wrap: wrap;
   }
 
   h1 {
@@ -80,5 +84,17 @@ p {
     display: block;
     align-items: center;
   }
+
+  .top-spacer {
+    height: 7.5vw;
+  }
+
+  .left-box {
+    flex:unset;
+    margin-right:unset;
+    margin-bottom: 7.5vw;
+    height: unset;
+  }
+
 }
 </style>

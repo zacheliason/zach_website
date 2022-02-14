@@ -1,8 +1,9 @@
 <template>
-<div style="width:80%;margin:0 auto">
+<div id="project-viewer" style="margin:0 auto">
     <div class="top-spacer"></div>
 
-    <h2 style='display:inline-block;margin-bottom: 0;padding-right: .3em;'>{{ remove_underscores($route.params.id) }}</h2>
+    <h2 style='color: var(--bright);display:inline-block;margin-bottom: 0;padding-right: .3em;'>{{ remove_underscores($route.params.id) }}</h2>
+  
     |
     <div class="date">
       posted {{ this.date }}
@@ -36,7 +37,8 @@
 <script>
 import Prism from 'prismjs'
 // import 'prismjs-darcula-theme/darcula.css';
-import '../assets/darcula.css'
+// import '../assets/darcula.css'
+import '../assets/material.css'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-python'
@@ -121,32 +123,37 @@ export default {
 </script>
 
 
-<style type="text/css" scoped>
-
-a {
-  font-weight: bold !important;
-  color: #f74825 !important;
+<style type="text/css">
+h1,h2,h3,h4,h5,h6 {
+  font-family: ibm-plex-mono, mono;
 }
 
-a:hover {
-  text-decoration: underline;
-  color: #08b7da !important;
+#project-viewer a {
+ color: var(--dark);
+ border-bottom: dotted 2px var(--dark);
 }
 
+#project-viewer a:hover  {
+  color: #73838b;
+  border-bottom: dotted 2px #73838b;
+}
 
 h3 {
   font-family: 'ibm-plex-mono', mono;
-  font-size: 3em;
 }
 
-img {
-  width: 100% !important;
+li {
+  line-height: 2em;
+}
+
+#project-viewer img {
+  width: 100%;
 }
 
 .date {
   display: inline;
   padding: 0 .3em;
-  color: #b5b5b5;
+  color: var(--dark);
   font-size: .7em;
   font-weight: bolder;
   font-family: 'ibm-plex-mono', mono;
@@ -174,7 +181,7 @@ img {
 
 .sans {
   font-family: 'ibm-plex-sans', sans-serif;
-  color: #b5b5b5;
+  color: var(--dark);
   font-size: .7em;
 }
 

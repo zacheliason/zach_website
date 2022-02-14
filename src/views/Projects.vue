@@ -3,17 +3,12 @@
     <div class="top-spacer"></div>
 
     <h2>projects</h2>
-    <div class="left">
-	<ul>
+	<ul style="list-style-type: none;padding:0">
         <li v-for="project in projects" :key="project.id">
           <router-link :to="'/projects/' + project.name">{{project.name.replaceAll("_", " ").replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}}<span class='date'> {{ format_date(project.date) }}</span></router-link>
         </li>
       <li><router-link to="/projects/spotify_streamgraph">Spotify Streamgraph Generator<span class='date'> 1/30/2021</span></router-link></li>
 	</ul>
-    </div>
-    <div class="right">
-
-    </div>
     <div class="top-spacer"></div>
   </div>
 </template>
@@ -32,7 +27,9 @@ export default {
   },
   computed: {
     projects() {
-      return this.$root.$data.projects
+      return this.$root.$data.projects.filter(x => {
+        return (x.name != "labbott_data_training");
+      });
     }
   }
 }
@@ -40,7 +37,7 @@ export default {
 
 <style lang="css" scoped>
 .date {
-  color: #b5b5b5;
+  color: var(--dark);
   font-size: .7em;
   font-weight: bolder;
   font-family: 'ibm-plex-mono', mono;
@@ -48,6 +45,17 @@ export default {
 
 a:hover {
   text-decoration: underline;
+  border-bottom: 2px dotted var(--bright);
 }
+
+li a {
+ color: black;
+}
+
+li::before {
+  content: "# ";
+  color: var(--dark);
+}
+
 
 </style>

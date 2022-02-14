@@ -2,17 +2,15 @@
 <div style='height:100%;'>
   <div class="top-spacer"></div>
 
-  <div class="right">
-  <div class="top-spacer"></div>
-  <!-- <h2 class='invisible'>spacer</h2> -->
-    <div v-for="image in images" :key="image">
+  <div class="content">
+    <div class="flex-content">
+    <div v-for="image in images" :key="image" class="image-wrap">
       <img :src="'/images/' + image" alt="">
     </div>
     <div class="top-spacer"></div>
-  </div>
-
-  <div class="left" id='left-box'>
-    <h2 style='display:inline-block;margin-bottom: 0;padding-right: .3em;'>{{ item_name }}</h2>
+    </div>
+  <div class="description">
+    <h2 class='item-header'>{{ item_name }}</h2>
     <div class="date">
       {{ item_date }}
 
@@ -21,8 +19,12 @@
     <hr>
     <p>{{item_description}}</p>
     <div class="top-spacer"></div>
+    <div class="bottom-spacer"></div>
   </div>
 
+
+
+  </div>
 
 </div>
 </template>
@@ -72,35 +74,67 @@ export default {
 
 
 <style lang="css" scoped>
+
+.item-header {
+  display: inline-block;
+  margin-bottom: 0;
+  padding-right: .3em; 
+}
+
 #left-box {
   height: 100%;
 }
 
 img {
   padding: 0 0 1em 0;
+  max-height: var(--site-width);
+  max-width: 80vw;
 }
 
 .date {
   display: inline;
   padding: 0 .3em;
-  color: #b5b5b5;
+  color: var(--dark);
   font-size: .7em;
   font-weight: bolder;
   font-family: 'ibm-plex-mono', mono;
 }
 
 .date::before {
-  content:'|';
+  /*content:'|';*/
+  content:'published ';
   color: black;
   font-size: 1em;
 }
 
-
-@media screen and (max-width: 820px) {
-
+.content {
+  position: absolute;
+  width: 80vw;
+  /*margin: 0 calc((100vw - var(--site-width)) / 2);*/
+  margin: 0 10vw;
+  left:0;
 }
 
-@media screen and (max-width: 620px) {
+.flex-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.image_wrap {
+  max-height: 100%;
+}
+
+.description {
+  flex: 1;
+  width: var(--site-width);
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1000px) {
   .right {
     height:unset;
   }
@@ -114,6 +148,17 @@ img {
     content:unset;
     color: black;
     font-size: 1em;
+  }
+  .content, .description, img {
+    width: 100%;
+    margin: 0 auto;
+    position:unset;
+    max-width: 100%;
+    max-height: 80vh;
+  }
+  .item-header {
+    max-width: 90vw;
+    overflow-x: hidden;
   }
 
 }

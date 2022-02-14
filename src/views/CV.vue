@@ -17,18 +17,23 @@ export default {
 }
 </script>
 
-<style media="screen">
+<style media="screen" scoped>
   .cv {
-    background-color: #ededed;
-    padding: 0 15%;
+    background-color: var(--grey);
     position: absolute;
     left: 0;
+    padding: 0 calc((100vw - var(--site-width)) / 2);
   }
 
   @media screen and (max-width: 620px) {
     .cv {
-    padding: 0 1em 30vh 1em;
-
+      width: 100%;
+      padding: 0;
+      position: unset;
+      background-color: unset;
+    }
+    #router-view {
+      background-color: var(--grey);
     }
   }
 
