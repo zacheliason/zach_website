@@ -110,7 +110,6 @@ img {
 .content {
   position: absolute;
   width: 80vw;
-  /*margin: 0 calc((100vw - var(--site-width)) / 2);*/
   margin: 0 10vw;
   left:0;
 }

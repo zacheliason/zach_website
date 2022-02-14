@@ -12,7 +12,7 @@
 
     <div class="right">
     </div>
-    <img src="/images/mountain_about.png" alt="">
+    <img class='large' src="/images/mountain_about.png" alt="">
     <div class="top-spacer bottom-spacer"></div>
   </div>
 </template>
@@ -29,10 +29,6 @@ export default {
 
 img {
   width: 100%;
-}
-
-span:hover{
-  color: #f74825;
 }
 
 body {

@@ -285,7 +285,21 @@ a {
   height: 0;
 }
 
+.large {
+  width: 80vw;
+  margin: 0 10vw;
+  position: absolute;
+  left: 0;
+}
+
 @media screen and (max-width: 1000px) {
+  .large {
+    width: unset;
+    margin: unset;
+    position: unset;
+    left: unset;
+  }
+
   #router-view {
     padding:5%;
   }
