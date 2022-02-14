@@ -28,7 +28,7 @@ export default {
   computed: {
     projects() {
       return this.$root.$data.projects.filter(x => {
-        return (!x.name.startsWith("HIDE");
+        return (!x.name.startsWith("HIDE"));
       });
     }
   }
