@@ -28,7 +28,7 @@ export default {
   computed: {
     projects() {
       return this.$root.$data.projects.filter(x => {
-        return (x.name != "labbott_data_training");
+        return (!x.name.startsWith("HIDE");
       });
     }
   }
