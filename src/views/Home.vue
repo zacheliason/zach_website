@@ -83,6 +83,7 @@ p {
     height: unset;
     display: block;
     align-items: center;
+    margin-left: unset;
   }
 
   .top-spacer {

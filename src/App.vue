@@ -286,7 +286,7 @@ a {
 }
 
 .large {
-  width: 80vw;
+  width: 80vw !important;
   margin: 0 10vw;
   position: absolute;
   left: 0;
@@ -344,7 +344,7 @@ a {
  
   footer {
     width: 90vw;
-    padding: 0 5vw;
+    margin: 0 5vw;
   }
 
   #sitecode {

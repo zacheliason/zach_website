@@ -12,7 +12,7 @@
 
     <div class="right">
     </div>
-    <img class='large' src="/images/mountain_about.png" alt="">
+    <img class='large' style='padding-bottom: 7.5vw' src="/images/mountain_about.png" alt="">
     <div class="top-spacer bottom-spacer"></div>
   </div>
 </template>

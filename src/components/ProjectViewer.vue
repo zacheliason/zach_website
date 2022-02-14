@@ -2,7 +2,7 @@
 <div id="project-viewer" style="margin:0 auto">
     <div class="top-spacer"></div>
 
-    <h2 style='color: var(--bright);display:inline-block;margin-bottom: 0;padding-right: .3em;'>{{ remove_underscores($route.params.id) }}</h2>
+    <h2 style='color: var(--dark);display:inline-block;margin-bottom: 0;padding-right: .3em;'>{{ remove_underscores($route.params.id) }}</h2>
   
     |
     <div class="date">
