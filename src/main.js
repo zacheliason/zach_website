@@ -1,9 +1,9 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import dataset from './dataset.json'
-import items from './items.json'
-import VueMarkdown from 'vue-markdown'
+import dataset from "./dataset.json";
+import items from "./items.json";
+import VueMarkdown from "vue-markdown";
 
 Vue.config.productionTip = false;
 let data = {
@@ -18,22 +18,22 @@ let data = {
   // spotify_streamgraph data objects
   importedJSON: [],
   artist_list: [],
-  csv: '',
+  csv: "",
   top_artists: [],
   top_artists_keys: {},
   week_max: 0,
   new_width: 0,
-  files_imported: [],
-}
+  files_imported: []
+};
 
 // Globally register your component
-Vue.component('vue-markdown', VueMarkdown);
+Vue.component("vue-markdown", VueMarkdown);
 
 new Vue({
   router,
   data,
   components: {
-    VueMarkdown,
+    VueMarkdown
   },
   render: h => h(App)
 }).$mount("#app");

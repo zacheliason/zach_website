@@ -1,16 +1,54 @@
 <template>
-<div id="app">
-  <div id="nav" @click="this.$root.setTimer" @mouseover="this.$root.fadeSubPage" @mouseout="this.$root.fadeInSubPage">
-    <router-link v-bind:class="{ hover: this.$root.$data.wideScreen }" id="zach" class="showOnMobile" to="/">Home</router-link>
-    <router-link v-bind:class="{ hover: this.$root.$data.wideScreen }" id="zach" class="hideOnMobile" to="/">Zach Eliason</router-link>
-    <router-link v-bind:class="{ hover: this.$root.$data.wideScreen }" id="about" to="/about">About</router-link>
-    <router-link v-bind:class="{ hover: this.$root.$data.wideScreen }" id="portfolio" class="showOnMobile" to="/portfolio">Portfolio</router-link>
-    <router-link v-bind:class="{ hover: this.$root.$data.wideScreen }" id="portfolio" class="hideOnMobile" to="/portfolio">Design Portfolio</router-link>
-    <router-link v-bind:class="{ hover: this.$root.$data.wideScreen }" id="coding" to="/coding">Coding</router-link>
+  <div id="app">
+    <div
+      id="nav"
+      @click="this.$root.setTimer"
+      @mouseover="this.$root.fadeSubPage"
+      @mouseout="this.$root.fadeInSubPage"
+    >
+      <router-link
+        v-bind:class="{ hover: this.$root.$data.wideScreen }"
+        id="zach"
+        class="showOnMobile"
+        to="/"
+        >Home</router-link
+      >
+      <router-link
+        v-bind:class="{ hover: this.$root.$data.wideScreen }"
+        id="zach"
+        class="hideOnMobile"
+        to="/"
+        >Zach Eliason</router-link
+      >
+      <router-link
+        v-bind:class="{ hover: this.$root.$data.wideScreen }"
+        id="about"
+        to="/about"
+        >About</router-link
+      >
+      <router-link
+        v-bind:class="{ hover: this.$root.$data.wideScreen }"
+        id="portfolio"
+        class="showOnMobile"
+        to="/portfolio"
+        >Portfolio</router-link
+      >
+      <router-link
+        v-bind:class="{ hover: this.$root.$data.wideScreen }"
+        id="portfolio"
+        class="hideOnMobile"
+        to="/portfolio"
+        >Design Portfolio</router-link
+      >
+      <router-link
+        v-bind:class="{ hover: this.$root.$data.wideScreen }"
+        id="coding"
+        to="/coding"
+        >Coding</router-link
+      >
+    </div>
+    <router-view />
   </div>
-  <router-view />
-
-</div>
 </template>
 <script type="text/javascript">
 /**/
@@ -26,81 +64,68 @@
   position: fixed;
 }
 
-#app {}
+#app {
+}
 
 #zach {
   font-family: bc-novatica-cyr, sans-serif;
   font-weight: 800;
-  color: #24CFFA
-    /*teal*/
-     !important;
+  color: #24cffa /*teal*/ !important;
   text-decoration: none;
 
   position: fixed;
   font-size: 3em;
-  top: .2em;
-  left: .45em;
+  top: 0.2em;
+  left: 0.45em;
 }
 
 #portfolio {
   font-family: bc-novatica-cyr, sans-serif;
   font-weight: 800;
-  color: #24CFFA
-    /*teal*/
-     !important;
-  ;
+  color: #24cffa /*teal*/ !important;
   text-decoration: none;
 
   position: fixed;
   font-size: 3em;
-  top: .2em;
-  right: .45em;
+  top: 0.2em;
+  right: 0.45em;
 }
 
 #about {
   font-family: bc-novatica-cyr, sans-serif;
   font-weight: 800;
-  color: #24CFFA
-    /*teal*/
-     !important;
-  ;
+  color: #24cffa /*teal*/ !important;
   text-decoration: none;
 
   position: fixed;
   font-size: 3em;
-  bottom: .2em;
-  left: .45em;
+  bottom: 0.2em;
+  left: 0.45em;
 }
 
 #coding {
-  font-family:
-    bc-novatica-cyr, sans-serif;
+  font-family: bc-novatica-cyr, sans-serif;
   font-weight: 800;
-  color: #24CFFA
-    /*teal*/
-     !important;
-  ;
+  color: #24cffa /*teal*/ !important;
   text-decoration: none;
 
   position: fixed;
   font-size: 3em;
-  bottom: .2em;
-  right: .45em;
+  bottom: 0.2em;
+  right: 0.45em;
 }
-
-
 
 #zach,
 #coding,
 #about,
 #portfolio {
   z-index: 10000 !important;
-  transition: .5s;
-
+  transition: 0.5s;
 }
 
 #zach,
-#portfolio {}
+#portfolio {
+}
 
 * {
   box-sizing: border-box;
@@ -132,11 +157,8 @@ li {
   text-decoration: none;
   font-family: bc-novatica-cyr, sans-serif;
   font-weight: 800;
-  color: #24CFFA
-    /*teal*/
-  ;
+  color: #24cffa /*teal*/;
   list-style-type: none;
-
 }
 
 body {
@@ -151,8 +173,6 @@ body {
 .showOnMobile {
   opacity: 0 !important;
 }
-
-
 
 @keyframes fadeOut {
   0% {
@@ -183,13 +203,12 @@ body {
     transform: translateY(0);
   }
 }
-  .hover:hover {
+.hover:hover {
   font-size: 4em !important;
-  transition: .5s;
+  transition: 0.5s;
   transform: scale(1.08);
 }
 @media screen and (max-width: 740px) {
-
   #zach,
   #coding,
   #about,
@@ -199,7 +218,7 @@ body {
 
   .showOnMobile {
     display: inline-block;
-    opacity: 1.0 !important;
+    opacity: 1 !important;
     z-index: 101 !important;
   }
 
@@ -208,12 +227,13 @@ body {
   }
 
   footer {
-    bottom: .1em;
+    bottom: 0.1em;
   }
   h2 {
     font-size: 2em;
   }
-  p,li {
+  p,
+  li {
     font-size: 1.5em;
   }
 }

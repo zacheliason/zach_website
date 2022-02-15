@@ -1,8 +1,6 @@
 <template>
   <div class="spotify">
-    <div class="top-spacer">
-
-    </div>
+    <div class="top-spacer"></div>
     <FileImport />
   </div>
 </template>

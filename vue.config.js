@@ -5,9 +5,9 @@ module.exports = {
       rules: [
         {
           test: /\.md$/i,
-          loader: "raw-loader",
-        },
-      ],
-    },
-  },
-}
+          loader: "raw-loader"
+        }
+      ]
+    }
+  }
+};

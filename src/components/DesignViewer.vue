@@ -1,84 +1,73 @@
 <template>
-<div style='height:100%;'>
-  <div class="top-spacer"></div>
-
-  <div class="content">
-    <div class="flex-content">
-    <div v-for="image in images" :key="image" class="image-wrap">
-      <img :src="'/images/' + image" alt="">
-    </div>
+  <div style="height:100%;">
     <div class="top-spacer"></div>
+
+    <div class="content">
+      <div class="flex-content">
+        <div v-for="image in images" :key="image" class="image-wrap">
+          <img :src="'/images/' + image" alt="" />
+        </div>
+        <div class="top-spacer"></div>
+      </div>
+      <div class="description">
+        <h2 class="item-header">{{ item_name }}</h2>
+        <div class="date">
+          {{ item_date }}
+        </div>
+
+        <hr />
+        <p>{{ item_description }}</p>
+        <div class="top-spacer"></div>
+        <div class="bottom-spacer"></div>
+      </div>
     </div>
-  <div class="description">
-    <h2 class='item-header'>{{ item_name }}</h2>
-    <div class="date">
-      {{ item_date }}
-
-    </div>
-
-    <hr>
-    <p>{{item_description}}</p>
-    <div class="top-spacer"></div>
-    <div class="bottom-spacer"></div>
   </div>
-
-
-
-  </div>
-
-</div>
 </template>
 
 <script>
 export default {
   name: "DesignViewer",
-  props: {
-  },
+  props: {},
   computed: {
     item_index() {
-      let items = this.$root.$data.items
-      let name = this.$route.params.id
+      let items = this.$root.$data.items;
+      let name = this.$route.params.id;
 
       var i = items.findIndex(function(post, index) {
-        if(post.name == name)
-          return true;
+        if (post.name == name) return true;
       });
-      return i
-
+      return i;
     },
     item() {
-      let items = this.$root.$data.items
-      return items[this.item_index]
+      let items = this.$root.$data.items;
+      return items[this.item_index];
     },
     images() {
-      let item = this.item
-      return item.image
+      let item = this.item;
+      return item.image;
     },
     item_name() {
-      return this.item.name
+      return this.item.name;
     },
     item_description() {
-      return this.item.description
+      return this.item.description;
     },
     item_date() {
-      return this.item.date
-    },
+      return this.item.date;
+    }
   },
   data() {
-    return {}
+    return {};
   },
-  methods: {
-  }
-}
+  methods: {}
+};
 </script>
 
-
 <style lang="css" scoped>
-
 .item-header {
   display: inline-block;
   margin-bottom: 0;
-  padding-right: .3em; 
+  padding-right: 0.3em;
 }
 
 #left-box {
@@ -93,16 +82,16 @@ img {
 
 .date {
   display: inline;
-  padding: 0 .3em;
+  padding: 0 0.3em;
   color: var(--dark);
-  font-size: .7em;
+  font-size: 0.7em;
   font-weight: bolder;
-  font-family: 'ibm-plex-mono', mono;
+  font-family: "ibm-plex-mono", mono;
 }
 
 .date::before {
   /*content:'|';*/
-  content:'published ';
+  content: "published ";
   color: black;
   font-size: 1em;
 }
@@ -111,7 +100,7 @@ img {
   position: absolute;
   width: 80vw;
   margin: 0 10vw;
-  left:0;
+  left: 0;
 }
 
 .flex-content {
@@ -135,23 +124,25 @@ img {
 
 @media screen and (max-width: 1000px) {
   .right {
-    height:unset;
+    height: unset;
   }
 
   #left-box {
-    height:unset;
+    height: unset;
     padding-bottom: 20vw;
   }
 
   .date::before {
-    content:unset;
+    content: unset;
     color: black;
     font-size: 1em;
   }
-  .content, .description, img {
+  .content,
+  .description,
+  img {
     width: 100%;
     margin: 0 auto;
-    position:unset;
+    position: unset;
     max-width: 100%;
     max-height: 80vh;
   }
@@ -159,7 +150,5 @@ img {
     max-width: 90vw;
     overflow-x: hidden;
   }
-
 }
-
 </style>
