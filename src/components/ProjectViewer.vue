@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     remove_underscores(word) {
-      return word.replaceAll("_", " ").replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+      return word.replaceAll("HIDE_", "").replaceAll("_", " ").replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
     }
   },
   computed: {

@@ -78,6 +78,7 @@ export default {
       path = path.replace('projects', '🤖')
       path = path.replace('design', '💿')
       path = path.replace('about', '🙇‍♂️')
+      path = path.replace('HIDE_', '')
 
       if(this.isMobile()){
          return "";
