@@ -51,7 +51,7 @@
           </div>
         </div>
         <div v-else style="width:100%">
-          <p>Toggle a category to view items.</p>
+          <p class='mono'>Toggle a category to view items.</p>
         </div>
       </div>
     </div>

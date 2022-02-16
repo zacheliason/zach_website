@@ -1,24 +1,25 @@
 <template>
-  <div style="height:100%;width:100%;">
-    <div class="top-spacer"></div>
-    <div class="box">
+  <div class='home-box'>
+      <div>
+      <div class='top-spacer'></div>
       <div class="left-box">
-        <img src="/images/zach_homepage_2.png" alt="" />
+        <img style='max-width: 10em;' src="/images/ZachProfile3.png" alt="" />
       </div>
       <div class="right-box">
         <div style="height:100%;">
-          <h2 style="margin-top:0;">Hi, I'm Zach!</h2>
-          <p>
+          <h1 class='home-header'>Hi, I'm Zach!</h1>
+          <p class='home-text'>
             I'm an enthusiastic bioinformatics student studying at
-            <span class="smallcaps">BYU</span> (2023) with interests in
-            genetics, epidemiology, and quantitative ecology.
+            <span class="smallcaps">BYU</span> (2023) <br>
+	    I enjoy topics in genetics, genomics, epidemiology, and quantitative ecology
           </p>
+
           <!--<h1>🌱 🏔 👨‍🔬 🤖 🦠 🧬 ‍❤️‍🔥</h1>-->
           <!-- 🤠🤖💻🕴🐸🌍🪐🌝🎹🚲🌊🎞🦠🧬❤️‍🔥🇺🇦💽📀💾👨‍💻👾🌱✨ -->
         </div>
       </div>
-    </div>
     <div class="bottom-spacer"></div>
+    </div>
   </div>
 </template>
 
@@ -30,29 +31,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.top-spacer {
-  height: 30%;
-}
-
 img {
   width: 100%;
   padding: 0;
-}
-
-.left-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  margin-right: 1em;
-}
-
-.right-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  margin-left: 1em;
 }
 
 p {
@@ -64,10 +45,40 @@ p {
   justify-content: space-between;
 }
 
+.home-header {
+  font-weight: 800;
+  font-size: 3em;
+}
+
+.home-text {
+  font-size: 2em;
+  font-weight: 800;
+}
+
+.home-box {
+  height:100%;
+  width:100%;
+  display:flex;
+  align-items:center;
+}
+
 @media screen and (max-width: 820px) {
 }
 
 @media screen and (max-width: 620px) {
+  .home-box {
+    height: unset;
+    display: unset;
+  }
+
+  .home-header {
+    font-size:2em;
+  }
+
+  .home-text {
+    font-size: 1.5em;
+  }
+
   .box {
     flex-wrap: wrap;
   }

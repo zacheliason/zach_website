@@ -399,5 +399,9 @@ a {
   #mobile-bar h3 {
     margin-top: 0;
   }
+
+  footer {
+    position: unset;
+  }
 }
 </style>
