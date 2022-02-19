@@ -62,14 +62,13 @@ git clone PASTE_YOUR_GIT_REPOSITORY_LINK_HERE
 
 DataTiger uses a lot of different packages or libraries of code that we usually import at the top of `.py` files. In order for python to be able to use those packages, it needs to be able to download and access them. Anaconda lets you create environments that wrap all the libraries you need into a single version of python that we'll use to run our code.
 
-1) Install and open Anaconda
+Once you've installed (choose all the default install settings) and opened Anaconda, create a new environment (click the `Create` button at the bottom left of the page) and call it whatever you want. Now you'll need to add some packages to your environment. For each of the following packages, search using the bar in the top right of Anaconda (Make sure the `Installed` dropdown is set to `All` or `Not installed` so that you can see more than the packages you currently have in your environment.) After checking the box next to each package, hit `Apply` in the bottom right corner and wait for a new window to pop up, where you'll hit `Apply` again.
 
-2) Click the `Import` button at the bottom left of the page
-
-![](/images/screenshots/Screen%20Shot%202022-01-26%20at%201.04.39%20PM.png)
-3) Name your environment whatever you want (DataTiger, dt, etc.)
-
-4) Select `PATH_TO_DATATIGER/DataTiger2/environment.yml` as the source for your environment
+- `pyqt`
+- `openpyxl`
+- `pandas`
+- `seaborn`
+- `scikit-learn`
 
 ### 5. Download [Box Drive](https://www.box.com/resources/downloads) 
 After you install and set up Box Drive, you'll need to get edit access to the drive from a manager. This lets us control who can access/add to the database. Don't abuse these privileges by doing anything stupid (i.e. don't delete any files on Box)
@@ -78,7 +77,7 @@ After you install and set up Box Drive, you'll need to get edit access to the dr
 Here we're going to set up PyCharm so that it uses the conda environment or version of python we created in step 4. 
 1) Open PyCharm
 2) Click **File** > **Open** and then navigate to the Data Tiger folder you just downloaded
-3) Navigate to **PyCharm** > **Preferences**
+3) Navigate to **PyCharm** > **Preferences** if you're using a Mac, and **File > Settings** if you're using something else
 ![](/images/screenshots/Screen%20Shot%202022-01-26%20at%2011.41.51%20AM.png)
 4) Under `Python Interpreter:`, click on `Show All...`
 5) Click the `+` in the corner to add a new interpreter 

@@ -153,6 +153,10 @@ export default {
   margin: 0 auto;
 }
 
+strong {
+  font-weight: bold;
+}
+
 h3,
 h1,
 h2,
@@ -198,7 +202,6 @@ footer a:hover {
 p {
   font-family: ibm-plex-serif, serif;
   font-style: normal;
-  font-weight: 100;
 }
 
 body {
