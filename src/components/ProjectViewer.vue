@@ -129,6 +129,10 @@ export default {
         /!\[(.*?)\]\((.+?)\)/,
         '![]($2)<p class="alt">$1</p>'
       );
+      contents = contents.replace(
+        /\[(.*?)\]\(([^\.]*?)\)/,
+        '[$1](https://zacheliason.com/#/projects/$2)'
+      );
 
       return contents;
     }

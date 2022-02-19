@@ -1,5 +1,5 @@
 ## Getting Started with DataTiger
-DataTiger is the data management and processing program we use in the Labbott for all our data needs. This tutorial should help you get set up to help with data tasks in the lab such as uploading files and downloading data. **If you want to set up a development version of DataTiger (i.e. you will be editing the source code, helping maintain and create new features, debugging problem files)  use [this tutorial](https://zacheliason.com/#/projects/HIDE_datatiger_setup_dev) instead.** This is all kind of a pain to get set up but it's nice to have once it's all up and running.
+DataTiger is the data management and processing program we use in the Labbott for all our data needs. This tutorial should help you get set up to help with data tasks in the lab such as uploading files and downloading data. **If you want to set up a development version of DataTiger (i.e. you will be editing the source code, helping maintain and create new features, debugging problem files)  use [this tutorial](HIDE_datatiger_setup_dev) instead.** This is all kind of a pain to get set up but it's nice to have once it's all up and running.
 
 ### 1. Install Git 
 _(Skip to step 2 if you already have Git installed on your computer)_
