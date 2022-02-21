@@ -76,10 +76,10 @@ If you have a Mac, your path will look similar to this: `/Users/zacheliason/Libr
 If you have a PC, your path will look similar to this: `C:\Users\BCBrown\Desktop\C:\Users\BCBrown\Desktop\clean_datAbbase_try_2_again.db`
 
 #### Update DataTiger Path
-1) Using a text editor, open the file `dataTiger.command` if you have a Mac and `dataTiger.exe` if you have something else.
+1) Using a text editor, open the file `dataTiger.command` 
 2) Edit line 10 to say `DATATIGER_DIRECTORY = ENTER_PATH_TO_YOUR_DATATIGER_HERE`, only subbing out `ENTER_PATH_TO_YOUR_DATATIGER_HERE` with the appropriate path.
 
 ### 6. Run DataTiger
-1) Double click on the file `dataTiger.command` if you have a Mac and `dataTiger.exe` if you have something else
+1) Double click on the file `dataTiger.command`
 
 ### You're done! 
