@@ -11,7 +11,7 @@
           <p class='home-text'>
             I'm an enthusiastic bioinformatics student studying at
             <span class="smallcaps">BYU</span> (2023) <br>
-	    I enjoy topics in genetics, genomics, epidemiology, and quantitative ecology
+	    I'm interested in computational cancer biology and genomics research.
           </p>
 
           <!--<h1>🌱 🏔 👨‍🔬 🤖 🦠 🧬 ‍❤️‍🔥</h1>-->
