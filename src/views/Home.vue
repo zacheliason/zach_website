@@ -3,15 +3,15 @@
       <div>
       <div class='top-spacer'></div>
       <div class="left-box">
-        <img style='max-width: 10em;' src="/images/ZachProfile3.png" alt="" />
+      <!--<img style='max-width: 10em;' src="/images/ZachProfile3.png" alt="" />-->
       </div>
       <div class="right-box">
         <div style="height:100%;">
-          <h1 class='home-header'>Hi, I'm Zach!</h1>
+          <h1 class='home-header'>Zach Eliason</h1>
           <p class='home-text'>
-            I'm an enthusiastic bioinformatics student studying at
-            <span class="smallcaps">BYU</span> (2023) <br>
-	    I'm interested in computational cancer immunology and genomics research.
+            I am a student studying bioinformatics at
+            <span class="smallcaps">BYU</span> (2023). <br>
+            I am interested in computational cancer immunology and genomics research. I also have experience in ecology and statistics research.
           </p>
 
           <!--<h1>🌱 🏔 👨‍🔬 🤖 🦠 🧬 ‍❤️‍🔥</h1>-->

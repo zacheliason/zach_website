@@ -63,6 +63,12 @@
 <script>
 export default {
   name: "Design",
+  props: data() {
+   return {
+       perpage: 10,
+       pageNumber: 0
+   }
+  },
   methods: {
     toggle_art() {
       this.$root.$data.show_art = !this.$root.$data.show_art;
@@ -115,6 +121,7 @@ export default {
         return new Date(b.date) - new Date(a.date);
       });
 
+      items = items.slice(this.pageNumber*this.perpage,this.pageNumber*this.perpage+1+this.perpage)
       return items;
     },
     show_photos() {
