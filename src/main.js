@@ -8,12 +8,17 @@ import items from "./items.json";
 import VueMarkdown from "vue-markdown";
 import recipe_txt from 'raw-loader!./recipes.txt';
 
-var CryptoJS = require("crypto-js")
-const cjson = require('compressed-json')
+function ceasar(string, shift) {
+  let resultArray = []
+  for (let i = 0; i < string.length; i++) {
+    let code = string.charCodeAt(i) + shift
+    resultArray.push(String.fromCharCode(code))
+  }
+  return resultArray.join("")
+}
 
-let decompressed_recipes = cjson.decompress.fromString(recipe_txt)
-var bytes  = CryptoJS.AES.decrypt(decompressed_recipes, 'zacheliason');
-var recipes = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+let shifted = ceasar(recipe_txt, -1)
+var recipes = JSON.parse(shifted)
 
 Vue.config.productionTip = false;
 let data = {

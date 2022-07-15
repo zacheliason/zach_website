@@ -1,11 +1,10 @@
 <template>
   <div>
     <div class="top-spacer"></div>
-    <div class="h-flex">
 
-    </div>
+    <h2>design</h2>
+    <hr>
 
-    <hr />
     <div id="middlebar">
       <div style="font-size:2em" @click="previouspage()" class='toggle'>⬅️</div>
               <h2

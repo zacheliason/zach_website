@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="top-spacer"></div>
+      <h2>recipes</h2>
 
         <input @keyup.delete="deleteValue(`titlesInput`)" @keypress="suggestFilterTitles" @click="suggestFilterTitles" id="titlesInput" type="text" list="titlesList" value="" placeholder="enter a title...">
         <input style='font-size:1em;font-weight:bolder' @keyup.enter="onEnterKeyword" @click="suggestFilterKeywords" @keypress="suggestFilterKeywords" id="keywordsInput" type="text" list="keywordsList" value="" placeholder="enter a keyword...">
