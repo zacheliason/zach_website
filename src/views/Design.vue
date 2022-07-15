@@ -2,7 +2,13 @@
   <div>
     <div class="top-spacer"></div>
     <div class="h-flex">
-      <h2
+
+    </div>
+
+    <hr />
+    <div id="middlebar">
+      <div style="font-size:2em" @click="previouspage()" class='toggle'>⬅️</div>
+              <h2
         v-bind:class="{ active: show_photos }"
         class="toggle"
         @click="toggle_photos()"
@@ -23,8 +29,9 @@
       >
         🖼 art
       </h2>
+      <div style="font-size:2em;margin:0" @click="nextpage()" class='toggle'>➡️</div>
     </div>
-    <hr />
+    <hr>
 
     <div class="relative">
       <div class="square_overlays">
@@ -36,7 +43,8 @@
       </div>
 
       <div class="items">
-        <div v-if="show_items" class="items">
+        <div v-if="show_items">
+        <div class="items">
           <div v-for="item in items" :key="item.id">
             <router-link :to="'/design/' + item.name"
               ><div
@@ -50,11 +58,15 @@
             ></router-link>
           </div>
         </div>
+        </div>
         <div v-else style="width:100%">
-          <p class='mono'>Toggle a category to view items.</p>
+          <p class='mono'>toggle a category to view items.</p>
         </div>
       </div>
     </div>
+
+    <br>
+    <div>{{num_pages}}</div>
 
     <div class="bottom-spacer top-spacer"></div>
   </div>
@@ -63,20 +75,37 @@
 <script>
 export default {
   name: "Design",
-  props: data() {
-   return {
-       perpage: 10,
+  data: function() {
+     return {
+       perpage: 6,
        pageNumber: 0
-   }
-  },
+     }
+   },
   methods: {
+    previouspage() {
+      let lengthItems = this.filtered_items.length
+      if (this.pageNumber > 0) {
+          this.pageNumber--
+      } else{
+      console.log("NO")
+      }
+    },
+    nextpage() {
+      let lengthItems = this.filtered_items.length
+      if (Math.ceil(lengthItems / this.perpage) > this.pageNumber + 1) {
+          this.pageNumber++
+      }
+    },
     toggle_art() {
+      this.pageNumber = 0
       this.$root.$data.show_art = !this.$root.$data.show_art;
     },
     toggle_photos() {
+      this.pageNumber = 0
       this.$root.$data.show_photos = !this.$root.$data.show_photos;
     },
     toggle_design() {
+      this.pageNumber = 0
       this.$root.$data.show_design = !this.$root.$data.show_design;
     },
     contains_object(obj, list) {
@@ -90,10 +119,15 @@ export default {
     }
   },
   computed: {
+    num_pages() {
+      let numRecipes = this.filtered_items.length
+      let numPages = Math.floor(numRecipes / this.perpage) + 1
+      return (this.pageNumber + 1).toString() + " of " + numPages.toString() + " pages"
+    },
     show_items() {
       return this.items.length > 0;
     },
-    items() {
+    filtered_items() {
       let items = [];
       if (this.$root.$data.show_art) {
         items = items.concat(
@@ -120,8 +154,12 @@ export default {
       items = Array.from(items_set).sort(function(a, b) {
         return new Date(b.date) - new Date(a.date);
       });
+      return items;
+    },
+    items() {
+      let items = this.filtered_items
 
-      items = items.slice(this.pageNumber*this.perpage,this.pageNumber*this.perpage+1+this.perpage)
+      items = items.slice(this.pageNumber*this.perpage,this.pageNumber*this.perpage+this.perpage)
       return items;
     },
     show_photos() {
@@ -205,6 +243,15 @@ export default {
   column-gap: 1em;
   height: auto;
   flex-wrap: wrap;
+}
+
+#middlebar div{
+ margin:0;
+}
+#middlebar {
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
 }
 
 @media screen and (max-width: 1000px) {

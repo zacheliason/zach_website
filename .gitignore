@@ -5,6 +5,7 @@ git.sh
 .es*
 .browsers*
 .idea
+src/recipes.json
 
 # local env files
 .env.local

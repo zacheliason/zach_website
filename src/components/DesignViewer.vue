@@ -1,9 +1,9 @@
 <template>
   <div style="height:100%;">
-    <div class="top-spacer"></div>
 
     <div class="content">
       <div class="flex-content">
+        <div class="image-wrap" style="padding-top:7.5vw"></div>
         <div v-for="image in images" :key="image" class="image-wrap">
           <img :src="'/images/' + image" alt="" />
         </div>
@@ -76,7 +76,8 @@ export default {
 
 img {
   padding: 0 0 1em 0;
-  max-height: var(--site-width);
+  /*max-height: var(--site-width);*/
+  max-height: 95vh;
   max-width: 80vw;
 }
 
@@ -112,8 +113,11 @@ img {
   width: 100%;
 }
 
-.image_wrap {
-  max-height: 100%;
+.image-wrap {
+  width: var(--site-width);
+  display: flex;
+  justify-content:center;
+  margin-bottom:1em;
 }
 
 .description {

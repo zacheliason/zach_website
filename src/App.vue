@@ -3,7 +3,7 @@
     <div id="bar">
       <div id="bar-container">
         <div>
-          <router-link to="/" class="bar-h3"
+          <router-link :to="backpath" class="bar-h3"
             ><h3>zacheliason{{ pathname }}</h3></router-link
           >
         </div>
@@ -26,6 +26,11 @@
           <div @mouseover="emoji('about')" @mouseleave="leaveemoji('about')">
             <router-link to="/about" class="emoji" id="emoji-about"
               >🙇‍♂️
+            </router-link>
+          </div>
+          <div @mouseover="emoji('recipes')" @mouseleave="leaveemoji('recipes')">
+            <router-link to="/recipes" class="emoji" id="emoji-recipes"
+              >🍲
             </router-link>
           </div>
         </div>
@@ -51,6 +56,10 @@
 
           <div class="">
             <router-link class="mono" to="/about">🙇‍♂️ about</router-link>
+          </div>
+
+          <div class="">
+            <router-link class="mono" to="/recipes">🍲 recipes</router-link>
           </div>
         </div>
       </div>
@@ -86,12 +95,29 @@
 export default {
   name: "App",
   computed: {
+    backpath() {
+      let path = this.$route.path;
+      path = path.split("/")
+      path = path.slice(0, path.length - 1).join("/")
+      if (path.length == 0) {
+        path = "/"
+      }
+      path = path.replace("/categories","")
+      path = path.replace("/authors","")
+      return path
+    },
     pathname() {
       let path = this.$route.path;
       path = path.replace("projects", "🤖");
       path = path.replace("design", "💿");
+      path = path.replace("recipes", "🍲");
       path = path.replace("about", "🙇‍♂️");
       path = path.replace("HIDE_", "");
+      path = path.replaceAll(" ", "-");
+
+      if (path.length > 24) {
+         path = path.slice(0,24) + "..."
+      }
 
       if (this.isMobile()) {
         return "";
@@ -133,8 +159,8 @@ export default {
 </script>
 <style>
 :root {
-  --site-width: 50vw;
-  --grey: #fafafa;
+  --site-width: 60vw;
+  --grey: #f5f5f5;
   --dark: #90a4ae;
   --bright: #f74825;
   /*--bright: #f6a434;*/
@@ -202,6 +228,7 @@ footer a:hover {
 p {
   font-family: ibm-plex-serif, serif;
   font-style: normal;
+  font-size: 1.2em;
 }
 
 body {
@@ -404,7 +431,7 @@ a {
   }
 
   footer {
-    position: unset;
+    display:none;
   }
 }
 </style>

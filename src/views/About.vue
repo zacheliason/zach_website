@@ -1,59 +1,142 @@
 <template>
-  <div class="page">
+  <div id="project-viewer" style="margin:0 auto">
     <div class="top-spacer"></div>
-    <div >
-          <h2>about</h2>
-          <p>I'm currently a student at Brigham Young University studying bioinformatics. While my research experience at BYU has been largely been in ecology and hydrology, I have recently become more interested in pursuing biomedical and genetic research.</p>
-          <p>I'm proficient in <span class='data'> Python, R, Bash, C++, SQL, MongoDB/NoSQL, Git version control, Javascript, Vue.js, Node.js, HTML/CSS, data visualization, </span><span class='design'> Adobe Illustrator, InDesign, Photoshop, Aftereffects, </span> &#38;<span class='misc'> Russian.</span></p>
-          <p>I enjoy hiking, art, music, photography, climbing, gardening, reading, ice skating, book-binding, &#38; cooking.</span></p>
-          <p>View my full resume <router-link class='mono' to="/about/cv">here</router-link>
-          </p>
-    </div>
+    <vue-markdown id="markdown" :source="md"></vue-markdown>
+    <p>View my full cv <router-link class='mono' to="/about/cv">here</router-link>.</p>
 
-    <div class="right">
-    </div>
-    <img class='large' style='padding-bottom: 7.5vw' src="/images/mountain_about.png" alt="">
+    <hr />
     <div class="top-spacer bottom-spacer"></div>
   </div>
 </template>
 
 <script>
+import Prism from "prismjs";
+import "../assets/material.css";
+import "prismjs/components/prism-bash";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-r";
+
 export default {
   name: "About",
-  components: {
+  props: {},
+  mounted() {
+    Prism.highlightAll();
   },
-}
+  methods: {
+  },
+  computed: {
+    project() {
+      return this.$root.$data.about[0]
+    },
+    date() {
+      let date = this.project.date.split("T")[0];
+      let parts = date.split("-");
+      return parts[1] + "/" + parts[2] + "/" + parts[0];
+    },
+    md() {
+      let project = this.project;
+      let contents = project.contents;
+      contents = contents.replace(
+        /!\[(.*?)\]\((.+?)\)/,
+        '![]($2)<p class="alt">$1</p>'
+      );
+      contents = contents.replace(
+        /\[(.*?)\]\(([^\.]*?)\)/,
+        '[$1](https://zacheliason.com/#/projects/$2)'
+      );
+      console.log(contents)
+
+      return contents;
+    }
+  },
+  data() {
+    return {};
+  }
+};
 </script>
 
-<style lang="css" scoped>
+<style type="text/css">
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: ibm-plex-mono, mono;
+}
 
-img {
+#project-viewer a {
+  color: var(--dark);
+  border-bottom: dotted 2px var(--dark);
+}
+
+#project-viewer a:hover {
+  color: #73838b;
+  border-bottom: dotted 2px #73838b;
+}
+
+h3 {
+  font-family: "ibm-plex-mono", mono;
+}
+
+li {
+  line-height: 2em;
+}
+
+#project-viewer img {
   width: 100%;
 }
 
-body {
-  background-color: white;
+.date {
+  display: inline;
+  padding: 0 0.3em;
+  color: var(--dark);
+  font-size: 0.7em;
+  font-weight: bolder;
+  font-family: "ibm-plex-mono", mono;
 }
 
+.inline {
+  display: inline-block;
+}
+
+.flexbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0.3em;
+}
+
+.no-padding {
+  padding: 0;
+  margin: 0;
+}
+
+.sans {
+  font-family: "ibm-plex-sans", sans-serif;
+  color: var(--dark);
+  font-size: 0.7em;
+}
+
+#markdown {
+  min-height: unset;
+}
 
 @media screen and (max-width: 820px) {
-
 }
 
 @media screen and (max-width: 620px) {
-  .right {
-    height: 0;
-  }
-  .left {
-    height: unset;
+  #markdown {
+    min-height: unset;
   }
 
-  .right-box {
-    height: unset;
-    display: block;
-    align-items: center;
+  pre {
+    overflow: scroll;
   }
-
 }
-
 </style>

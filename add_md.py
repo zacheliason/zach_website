@@ -137,7 +137,7 @@ md_list = []
 with open('src/dataset.json', 'w') as dataset:
 
     for filename in os.listdir("md"):
-        if '.md' in filename:
+        if '.md' in filename and filename != 'about.md':
             md_dict = {}
             with open(os.path.join("md", filename), 'r') as f:
                 contents = f.read()
@@ -150,6 +150,18 @@ with open('src/dataset.json', 'w') as dataset:
                 md_list.append(md_dict)
 
     dataset.write(json.dumps(md_list, default=json_serial))
+
+with open(os.path.join("md", 'about.md'), 'r') as f:
+    md_dict = {}
+    contents = f.read()
+    filename = filename.split('.md')[0]
+
+    md_dict['name'] = filename
+    md_dict['contents'] = contents
+    md_dict['date'] = datetime.now() if filename not in list(projects.keys()) else projects[filename]
+
+with open('src/about.json', 'w') as dataset:
+    dataset.write(json.dumps([md_dict], default=json_serial))
 
 print("python file ran")
 #
